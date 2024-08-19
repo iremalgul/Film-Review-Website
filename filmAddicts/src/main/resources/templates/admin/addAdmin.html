@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Registration and Login System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Film Addicts</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/film/index}">Films</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/user/users}">Users</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto"> <li class="nav-item">
+        <a class="nav-link">Welcome, <span th:text="${currentUser.name}"></span>!</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br /><br /><br />
+<div class="container">
+  <div class="row col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-center">Add Admin</h2>
+      </div>
+      <div th:if="${param.success}">
+        <div class="alert alert-info">
+          New Admin successfully added!
+        </div>
+      </div>
+      <div class="card-body">
+        <form
+                method="post"
+                role="form"
+                th:action="@{/admin/save}"
+                th:object="${user}"
+        >
+          <div class="form-group mb-3">
+            <label class="form-label">First Name</label>
+            <input
+                    class="form-control"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Enter first name"
+                    th:field="${user.firstName}"
+                    type="text"
+            />
+            <p th:errors = "${user.firstName}" class="text-danger"
+               th:if="${#fields.hasErrors('firstName')}"></p>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="form-label">Last Name</label>
+            <input
+                    class="form-control"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Enter last name"
+                    th:field="${user.lastName}"
+                    type="text"
+            />
+            <p th:errors = "${user.lastName}" class="text-danger"
+               th:if="${#fields.hasErrors('lastName')}"></p>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="form-label">Email</label>
+            <input
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email address"
+                    th:field="${user.email}"
+                    type="email"
+            />
+            <p th:errors = "${user.email}" class="text-danger"
+               th:if="${#fields.hasErrors('email')}"></p>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="form-label">Password</label>
+            <input
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    th:field="${user.password}"
+                    type="password"
+            />
+            <p th:errors = "${user.password}" class="text-danger"
+               th:if="${#fields.hasErrors('password')}"></p>
+          </div>
+          <div class="row">
+            <div class="offset-sm-4 col-sm-4 d-grid">
+            <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+            <div class="col-sm-4 d-grid">
+              <a class="btn btn-outline-primary" th:href="@{/admin/user/users}" role="button">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Film Addicts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Film Addicts</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/film/index}">Films</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/user/users}">Users</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto"> <li class="nav-item">
+                <a class="nav-link">Welcome, <span th:text="${currentUser.name}"></span>!</a>
+            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class ="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto rounded border p-4 m-4">
+            <h2 class="text-center mb-5">New Film</h2>
+
+            <form method="post" enctype="multipart/form-data" th:object="${filmDto}" th:action="@{/admin/film/createFilm}">
+
+                <div class="row mb-3">
+                    <label  class="col-sm-4 col-form-label">Name</label>
+                    <div class="col-sm-8">
+                        <input  class="form-control" th:field="${filmDto.name}">
+                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="${filmDto.name}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-4 col-form-label">Genre</label>
+                    <div class="col-sm-8">
+                        <input  class="form-control" th:field="${filmDto.genre}">
+                        <p th:if="${#fields.hasErrors('genre')}" th:errorclass="text-danger" th:errors="${filmDto.genre}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                        <textarea  class="form-control" th:field="${filmDto.description}"></textarea>
+                        <p th:if="${#fields.hasErrors('description')}" th:errorclass="text-danger" th:errors="${filmDto.description}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-4 col-form-label">Release Date</label>
+                    <div class="col-sm-8">
+                        <input  class="form-control" type="date" th:field="${filmDto.releaseDate}">
+                        <p th:if="${#fields.hasErrors('releaseDate')}" th:errorclass="text-danger" th:errors="${filmDto.releaseDate}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-4 col-form-label">Image</label>
+                    <div class="col-sm-8">
+                        <input  class="form-control" type="file" th:field="${filmDto.imageFile}">
+                        <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="text-danger" th:errors="${filmDto.imageFile}"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-sm-4 col-sm-4 d-grid">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="col-sm-4 d-grid">
+                        <a class="btn btn-outline-primary" th:href="@{/admin/film/index}" role="button">Cancel</a>
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
