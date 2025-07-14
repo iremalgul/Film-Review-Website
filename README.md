@@ -11,8 +11,8 @@
 ![](./Ekran görüntüsü 2025-07-14 233027.png)
 ![](./Ekran görüntüsü 2025-07-14 233047.png)
 ![](./Ekran görüntüsü 2025-07-14 233108.png)
-![](./Ekran görüntüsü 2025-07-14 233123.png)
-
+![](Ekran görüntüsü 2025-07-14 233123.png)
+Ekran görüntüsü 2025-07-14 233123.png
 
 
 
